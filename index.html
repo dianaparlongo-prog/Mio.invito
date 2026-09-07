@@ -6,19 +6,21 @@
   <title>Invito di Nozze</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body, html { width: 100%; height: 100%; overflow-x: hidden; font-family: sans-serif; background-color: #1a0305; }
+    body, html { width: 100%; height: 100%; overflow-x: hidden; font-family: 'Georgia', serif; background-color: #1a0305; color: #ffffff; }
 
     #invito-wrapper { position: relative; width: 100%; min-height: 100vh; }
 
-    /* Copertina con le ante */
+    /* Copertina */
     #busta-copertina {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       z-index: 100; display: flex; cursor: pointer; overflow: hidden;
+      background-color: #1a0305;
     }
 
     .anta {
       width: 50%; height: 100%; object-fit: cover;
       transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+      z-index: 102;
     }
 
     .fiocco-centro {
@@ -31,38 +33,71 @@
     .testo-tap {
       position: absolute; bottom: 35px; left: 50%;
       transform: translateX(-50%); font-size: 11px;
-      letter-spacing: 3px; color: #ffffff; z-index: 101;
+      letter-spacing: 3px; color: #ffffff; z-index: 106;
       font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+      font-family: sans-serif;
     }
 
-    /* Effetto apertura */
     #busta-copertina.aperto .anta-sinistra { transform: translateX(-100%); }
     #busta-copertina.aperto .anta-destra { transform: translateX(100%); }
     #busta-copertina.aperto .fiocco-centro,
     #busta-copertina.aperto .testo-tap { opacity: 0; pointer-events: none; }
-    #busta-copertina.aperto { pointer-events: none; }
+    #busta-copertina.aperto { pointer-events: none; background-color: transparent; transition: background-color 1s linear; }
 
-    /* Parte interna dell'invito */
+    /* Struttura Pagine Interne */
     #sito-interno {
       width: 100%;
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
+      background-color: #1a0305;
     }
 
-    .img-interno {
+    .sezione-pagina {
       width: 100%;
       max-width: 600px;
-      height: auto;
-      display: block;
+      padding: 40px 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
+
+    /* Pagina 1: Immagine e Nomi */
+    .img-interno { width: 100%; height: auto; display: block; }
+    .titolo-sposi { font-size: 32px; margin-top: 20px; letter-spacing: 2px; color: #f3e5ab; }
+    .data-evento { font-size: 18px; margin-top: 10px; font-style: italic; opacity: 0.9; }
+
+    /* Pagina 2: Countdown e Mappa */
+    .countdown-box {
+      display: flex; justify-content: center; gap: 15px; margin: 25px 0;
+    }
+    .time-unit {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 10px 15px; border-radius: 8px; min-width: 65px;
+      border: 1px solid rgba(243, 229, 171, 0.3);
+    }
+    .time-unit span { display: block; font-size: 22px; font-weight: bold; color: #f3e5ab; }
+    .time-unit label { font-size: 10px; text-transform: uppercase; font-family: sans-serif; opacity: 0.8; }
+
+    .mappa-container {
+      width: 100%; height: 280px; margin-top: 20px; border-radius: 12px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    iframe { width: 100%; height: 100%; border: 0; }
+
+    /* Pagina 3: Dress Code e RSVP */
+    .btn-rsvp {
+      display: inline-block; margin-top: 25px; padding: 15px 30px;
+      background-color: #f3e5ab; color: #1a0305; text-decoration: none;
+      font-weight: bold; font-family: sans-serif; border-radius: 30px;
+      letter-spacing: 1px; transition: transform 0.2s ease;
+    }
+    .btn-rsvp:active { transform: scale(0.95); }
   </style>
 </head>
 <body>
 
   <div id="invito-wrapper">
-    <!-- Copertina Interattiva -->
+    <!-- Copertina -->
     <div id="busta-copertina" onclick="apriInvito()">
       <img class="anta anta-sinistra" src="anta-sinistra.png" alt="Anta Sinistra">
       <img class="fiocco-centro" src="fiocco.png" alt="Fiocco">
@@ -70,11 +105,52 @@
       <div class="testo-tap">TAP TO OPEN</div>
     </div>
 
-    <!-- Pagine dell'Invito -->
+    <!-- Contenuto Interno -->
     <div id="sito-interno">
-      <img class="img-interno" src="invito-interno.png" alt="Pagina 1">
-      <img class="img-interno" src="invito-pagina2.png" alt="Pagina 2">
-      <img class="img-interno" src="invito-pagina3.png" alt="Pagina 3">
+      
+      <!-- PAGINA 1: Copertina Interna con Nomi e Data -->
+      <div class="sezione-pagina">
+        <img class="img-interno" src="invito-interno.png" alt="Invito">
+        <h1 class="titolo-sposi">Marco & Sofia</h1>
+        <p class="data-evento">15 Settembre 2027 - ore 16:30</p>
+      </div>
+
+      <!-- PAGINA 2: Countdown e Mappa -->
+      <div class="sezione-pagina">
+        <h2 style="color: #f3e5ab; font-size: 24px;">Il Countdown</h2>
+        
+        <div class="countdown-box">
+          <div class="time-unit"><span id="giorni">00</span><label>Giorni</label></div>
+          <div class="time-unit"><span id="ore">00</span><label>Ore</label></div>
+          <div class="time-unit"><span id="minuti">00</span><label>Min</label></div>
+          <div class="time-unit"><span id="secondi">00</span><label>Sec</label></div>
+        </div>
+
+        <h3 style="margin-top: 30px; font-size: 20px; color: #f3e5ab;">Villa Balbiano</h3>
+        <p style="font-size: 14px; opacity: 0.8; margin-top: 5px;">Piazza Sommariva 2, Ossuccio, Lago di Como</p>
+        
+        <div class="mappa-container">
+          <!-- Mappa Google Maps di Villa Balbiano -->
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2777.491328902517!2d9.1724213!3d45.9614532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478423f044943f65%3A0xb351e2333792fa6!2sVilla%20Balbiano!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+
+      <!-- PAGINA 3: Dress Code e RSVP -->
+      <div class="sezione-pagina">
+        <h2 style="color: #f3e5ab; font-size: 24px;">Dress Code</h2>
+        <p style="margin-top: 10px; font-size: 16px; font-style: italic;">Elegante & Formale</p>
+        
+        <hr style="margin: 30px auto; width: 50%; border: 0; border-top: 1px solid rgba(255,255,255,0.2);">
+
+        <h2 style="color: #f3e5ab; font-size: 24px;">Conferma la tua presenza</h2>
+        <p style="font-size: 14px; margin-top: 10px; opacity: 0.8;">È gradita gentile conferma entro il 15 Luglio 2027</p>
+        
+        <!-- Sostituisci 393331234567 con il tuo numero cellulare -->
+        <a href="https://wa.me/393331234567?text=Ciao!%20Confermo%20la%20mia%20presenza%20al%20matrimonio!" class="btn-rsvp" target="_blank">
+          CONFERMA SU WHATSAPP
+        </a>
+      </div>
+
     </div>
   </div>
 
@@ -82,6 +158,23 @@
     function apriInvito() {
       document.getElementById('busta-copertina').classList.add('aperto');
     }
+
+    // Data impostata: 15 Settembre 2027 ore 16:30 (Mese 8 = Settembre)
+    const dataMatrimonio = new Date(2027, 8, 15, 16, 30, 0).getTime();
+
+    const timer = setInterval(function() {
+      const ora = new Date().getTime();
+      const differenza = dataMatrimonio - ora;
+
+      if (differenza > 0) {
+        document.getElementById("giorni").innerText = Math.floor(differenza / (1000 * 60 * 60 * 24));
+        document.getElementById("ore").innerText = Math.floor((differenza % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById("minuti").innerText = Math.floor((differenza % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById("secondi").innerText = Math.floor((differenza % (1000 * 60)) / 1000);
+      } else {
+        clearInterval(timer);
+      }
+    }, 1000);
   </script>
 
 </body>
