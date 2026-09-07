@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AMAYA'S Y2K BASH</title>
+  <title>AMAYA'S 27th BDAY BASH</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -23,7 +23,6 @@
       background-color: #0d0118; transition: opacity 0.8s ease, visibility 0.8s;
     }
 
-    /* Immagine del CD Sfondo/Overlay */
     .cd-container {
       position: relative; width: 320px; height: 320px;
       display: flex; justify-content: center; align-items: center;
@@ -36,10 +35,7 @@
       transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Animazione Rotazione CD al Click */
-    .cd-spin {
-      animation: spin 1.2s infinite linear;
-    }
+    .cd-spin { animation: spin 1.2s infinite linear; }
 
     @keyframes spin {
       from { transform: rotate(0deg); }
@@ -58,10 +54,8 @@
 
     #copertina-cd.nascosto { opacity: 0; visibility: hidden; pointer-events: none; }
 
-    /* Struttura Pagine Interne */
-    #sito-interno {
-      width: 100%; display: flex; flex-direction: column; align-items: center;
-    }
+    /* Pagine Interne */
+    #sito-interno { width: 100%; display: flex; flex-direction: column; align-items: center; }
 
     .sezione-pagina {
       width: 100%; min-height: 100vh; padding: 40px 20px; text-align: center;
@@ -74,7 +68,6 @@
       border: 2px solid #00ffff; box-shadow: 0 0 20px #ff007f; border-radius: 10px;
     }
 
-    /* Pulsante Next Track */
     .btn-next-track {
       display: inline-block; margin-top: 25px; padding: 12px 25px;
       background: #000000; color: #00ffff; font-weight: bold;
@@ -84,17 +77,23 @@
     }
     .btn-next-track:active { transform: scale(0.95); }
 
-    /* Pagina 3: Countdown & Mappa */
-    .countdown-box { display: flex; justify-content: center; gap: 8px; margin: 20px 0; width: 100%; max-width: 420px; }
+    /* Pagina 2: Dettagli & Countdown */
+    .info-box {
+      background: rgba(0,0,0,0.8); border: 2px solid #ff007f; border-radius: 10px;
+      padding: 15px; width: 100%; max-width: 450px; margin-bottom: 15px;
+      box-shadow: 0 0 10px #ff007f;
+    }
+
+    .countdown-box { display: flex; justify-content: center; gap: 8px; margin: 15px 0; width: 100%; max-width: 420px; }
     .time-unit {
       background: #000; padding: 10px; border-radius: 5px; flex: 1;
-      border: 2px solid #ff007f; box-shadow: 0 0 8px #ff007f;
+      border: 2px solid #00ffff; box-shadow: 0 0 8px #00ffff;
     }
-    .time-unit span { display: block; font-size: 22px; font-weight: bold; color: #00ffff; font-family: sans-serif; }
+    .time-unit span { display: block; font-size: 22px; font-weight: bold; color: #ff007f; font-family: sans-serif; }
     .time-unit label { font-size: 8px; text-transform: uppercase; color: #fff; opacity: 0.9; }
 
     .mappa-container {
-      width: 100%; max-width: 450px; height: 220px; margin-top: 15px; border-radius: 8px; overflow: hidden;
+      width: 100%; max-width: 450px; height: 200px; margin-top: 10px; border-radius: 8px; overflow: hidden;
       border: 2px solid #00ffff; box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
     }
     iframe { width: 100%; height: 100%; border: 0; filter: invert(90%) hue-rotate(180deg); }
@@ -114,8 +113,7 @@
     <!-- Copertina CD Animato -->
     <div id="copertina-cd" onclick="playCD()">
       <div class="cd-container">
-        <!-- Inserisci qui l'immagine del tuo CD Y2K -->
-        <img id="disco-img" class="img-cd" src="cd-copertina.png" alt="CD Y2K">
+        <img id="disco-img" class="img-cd" src="cd-copertina.png" alt="CD Y2K Amaya">
       </div>
       <div class="btn-play-cd">▶️ PLAY ALBUM</div>
     </div>
@@ -125,16 +123,20 @@
       
       <!-- PAGINA 1: Collage Fotocamera Canon -->
       <div class="sezione-pagina" id="pagina-collage">
-        <!-- Inserisci qui la grafica del collage della fotocamera Canon -->
-        <img class="img-collage" src="invito-interno.png" alt="Y2K Collage">
-        
+        <img class="img-collage" src="invito-interno.png" alt="Amaya 27th Birthday Collage">
         <a href="#pagina-dettagli" class="btn-next-track">NEXT TRACK &gt;&gt;</a>
       </div>
 
-      <!-- PAGINA 2: Countdown, Location & RSVP -->
+      <!-- PAGINA 2: Countdown, Info & Mappa -->
       <div class="sezione-pagina" id="pagina-dettagli">
-        <h2 style="color: #00ffff; font-size: 20px; text-transform: uppercase; text-shadow: 0 0 8px #00ffff;">[ PARTY COUNTDOWN ]</h2>
+        <h2 style="color: #00ffff; font-size: 20px; text-transform: uppercase; text-shadow: 0 0 8px #00ffff; margin-bottom: 10px;">★ AMAYA'S 27th BDAY ★</h2>
         
+        <div class="info-box">
+          <p style="color: #fff; font-size: 13px;"><strong>DRESS CODE:</strong> Black Tie Classy, Upscale, Sexy / Rich Widow Vibes 💋</p>
+          <p style="color: #00ffff; font-size: 12px; margin-top: 8px;"><strong>DINNER:</strong> 7:30 PM @ MaKiin</p>
+          <p style="color: #00ffff; font-size: 12px;"><strong>DRINKS:</strong> 9:00 / 10:00 PM @ Lizzards Pub</p>
+        </div>
+
         <div class="countdown-box">
           <div class="time-unit"><span id="giorni">00</span><label>Days</label></div>
           <div class="time-unit"><span id="ore">00</span><label>Hours</label></div>
@@ -142,15 +144,15 @@
           <div class="time-unit"><span id="secondi">00</span><label>Secs</label></div>
         </div>
 
-        <h3 style="margin-top: 15px; font-size: 18px; color: #ff007f; text-shadow: 0 0 5px #ff007f;">LOCATION & MAP</h3>
-        <p style="font-size: 13px; color: #fff; margin-top: 5px;">2651 Kipling St, Houston, TX</p>
+        <h3 style="margin-top: 10px; font-size: 16px; color: #ff007f;">LOCATION & MAP</h3>
+        <p style="font-size: 12px; color: #fff;">2651 Kipling St, Houston, TX 77098</p>
         
         <div class="mappa-container">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.8!2d12.496!3d41.902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDU0JzA3LjIiTiAxMsKwMjknNDU0Ni42IkU!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit" allowfullscreen="" loading="lazy"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3464.2!2d-95.421!3d29.738!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjl8NDQnMTYuOCJOIDk1wrAyNScxNS42Ilc!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit" allowfullscreen="" loading="lazy"></iframe>
         </div>
 
-        <a href="https://wa.me/393331234567?text=Ciao!%20Confermo%20la%20mia%20presenza%20al%20party%20Y2K!" class="btn-rsvp" target="_blank">
-          RSVP VIA WHATSAPP 📲
+        <a href="https://wa.me/1234567890?text=Ciao%20Amaya!%20Confermo%20la%20mia%20presenza%20per%20il%20tuo%2027°%20compleanno!" class="btn-rsvp" target="_blank">
+          CONFIRM ACCESS (RSVP) 📲
         </a>
       </div>
 
@@ -162,16 +164,15 @@
       const disco = document.getElementById('disco-img');
       const copertina = document.getElementById('copertina-cd');
       
-      // Far girare il CD
       disco.classList.add('cd-spin');
 
-      // Dopo 1 secondo di rotazione sfuma la copertina
       setTimeout(function() {
         copertina.classList.add('nascosto');
       }, 1000);
     }
 
-    const dataFesta = new Date(2027, 1, 6, 21, 0, 0).getTime();
+    // Data aggiornata: 6 Febbraio 2027 (dall'immagine del CD)
+    const dataFesta = new Date(2027, 1, 6, 19, 30, 0).getTime();
 
     const timer = setInterval(function() {
       const ora = new Date().getTime();
