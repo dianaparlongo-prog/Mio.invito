@@ -15,7 +15,7 @@
 
     #invito-wrapper { position: relative; width: 100%; min-height: 100vh; }
 
-    /* Copertina CD Y2K */
+    /* Copertina CD Y2K con Sfondo Sfumato Glam Rosa e Viola */
     #copertina-cd {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       z-index: 100; display: flex; flex-direction: column;
@@ -57,7 +57,7 @@
 
     #copertina-cd.nascosto { opacity: 0; visibility: hidden; pointer-events: none; }
 
-    /* Pagine Interne */
+    /* Pagine Interne con Sfondo Glam */
     #sito-interno { 
       width: 100%; display: flex; flex-direction: column; align-items: center;
       background: radial-gradient(circle, #2a023b 0%, #0d0014 100%);
@@ -81,13 +81,15 @@
       border: 2px solid #ff007f; border-radius: 30px; text-decoration: none;
       box-shadow: 0 0 15px #00ffff; transition: transform 0.2s;
     }
+    .btn-next-track:active { transform: scale(0.95); }
 
-    /* Pulsante Mute / Play audio fluttuante */
+    /* Pulsante Audio Fluttuante */
     #audio-control {
       position: fixed; bottom: 15px; right: 15px; z-index: 99;
-      background: rgba(0,0,0,0.8); border: 2px solid #00ffff; color: #ff007f;
-      padding: 8px 12px; border-radius: 20px; font-size: 12px; cursor: pointer;
+      background: rgba(0,0,0,0.85); border: 2px solid #00ffff; color: #ff007f;
+      padding: 8px 14px; border-radius: 20px; font-size: 11px; cursor: pointer;
       box-shadow: 0 0 10px #00ffff; font-family: sans-serif; display: none;
+      font-weight: bold;
     }
 
     /* Pagina 2: Dettagli & Countdown */
@@ -121,8 +123,10 @@
 </head>
 <body>
 
-  <!-- Elemento Audio -->
-  <audio id="bg-music" src="musica.mp3" loop></audio>
+  <!-- Audio Element -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="musica.mp3" type="audio/mpeg">
+  </audio>
   <button id="audio-control" onclick="toggleAudio()">🔊 MUSIC ON</button>
 
   <div id="invito-wrapper">
@@ -185,10 +189,12 @@
       
       disco.classList.add('cd-spin');
 
-      // Avvia la musica
+      // Tenta la riproduzione immediata al tocco dell'utente
       audio.play().then(() => {
         audioBtn.style.display = 'block';
-      }).catch(e => console.log("Audio play blocked", e));
+      }).catch(err => {
+        console.log("Audio non riprodotto:", err);
+      });
 
       setTimeout(function() {
         copertina.classList.add('nascosto');
