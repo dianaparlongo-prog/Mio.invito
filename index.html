@@ -15,7 +15,7 @@
 
     #invito-wrapper { position: relative; width: 100%; min-height: 100vh; }
 
-    /* Copertina CD Y2K con Sfondo Sfumato Glam Rosa e Viola */
+    /* Copertina CD Y2K */
     #copertina-cd {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       z-index: 100; display: flex; flex-direction: column;
@@ -57,7 +57,7 @@
 
     #copertina-cd.nascosto { opacity: 0; visibility: hidden; pointer-events: none; }
 
-    /* Pagine Interne con Sfondo Glam */
+    /* Pagine Interne */
     #sito-interno { 
       width: 100%; display: flex; flex-direction: column; align-items: center;
       background: radial-gradient(circle, #2a023b 0%, #0d0014 100%);
@@ -81,7 +81,14 @@
       border: 2px solid #ff007f; border-radius: 30px; text-decoration: none;
       box-shadow: 0 0 15px #00ffff; transition: transform 0.2s;
     }
-    .btn-next-track:active { transform: scale(0.95); }
+
+    /* Pulsante Mute / Play audio fluttuante */
+    #audio-control {
+      position: fixed; bottom: 15px; right: 15px; z-index: 99;
+      background: rgba(0,0,0,0.8); border: 2px solid #00ffff; color: #ff007f;
+      padding: 8px 12px; border-radius: 20px; font-size: 12px; cursor: pointer;
+      box-shadow: 0 0 10px #00ffff; font-family: sans-serif; display: none;
+    }
 
     /* Pagina 2: Dettagli & Countdown */
     .info-box {
@@ -110,10 +117,13 @@
       font-weight: bold; font-family: sans-serif; border-radius: 50px; letter-spacing: 2px;
       border: 2px solid #00ffff; box-shadow: 0 0 20px #ff007f; transition: transform 0.2s;
     }
-    .btn-rsvp:active { transform: scale(0.95); }
   </style>
 </head>
 <body>
+
+  <!-- Elemento Audio -->
+  <audio id="bg-music" src="musica.mp3" loop></audio>
+  <button id="audio-control" onclick="toggleAudio()">🔊 MUSIC ON</button>
 
   <div id="invito-wrapper">
     <!-- Copertina CD Animato -->
@@ -166,15 +176,33 @@
   </div>
 
   <script>
+    const audio = document.getElementById('bg-music');
+    const audioBtn = document.getElementById('audio-control');
+
     function playCD() {
       const disco = document.getElementById('disco-img');
       const copertina = document.getElementById('copertina-cd');
       
       disco.classList.add('cd-spin');
 
+      // Avvia la musica
+      audio.play().then(() => {
+        audioBtn.style.display = 'block';
+      }).catch(e => console.log("Audio play blocked", e));
+
       setTimeout(function() {
         copertina.classList.add('nascosto');
       }, 1000);
+    }
+
+    function toggleAudio() {
+      if (audio.paused) {
+        audio.play();
+        audioBtn.innerText = "🔊 MUSIC ON";
+      } else {
+        audio.pause();
+        audioBtn.innerText = "🔇 MUSIC OFF";
+      }
     }
 
     const dataFesta = new Date(2027, 1, 6, 19, 30, 0).getTime();
@@ -186,7 +214,7 @@
       if (differenza > 0) {
         document.getElementById("giorni").innerText = Math.floor(differenza / (1000 * 60 * 60 * 24));
         document.getElementById("ore").innerText = Math.floor((differenza % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        document.getElementById("minuti").innerText = Math.floor((differenza % (1000 * 60 % (1000 * 60 * 60))) / (1000 * 60));
+        document.getElementById("minuti").innerText = Math.floor((differenza % (1000 * 60 * 60)) / (1000 * 60));
         document.getElementById("secondi").innerText = Math.floor((differenza % (1000 * 60)) / 1000);
       } else {
         clearInterval(timer);
