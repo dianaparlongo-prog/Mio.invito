@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
@@ -44,7 +44,7 @@
     #busta-copertina.aperto .testo-tap { opacity: 0; pointer-events: none; }
     #busta-copertina.aperto { pointer-events: none; background-color: transparent; transition: background-color 1s linear; }
 
-    /* Pagine Interne Centrate */
+    /* Struttura Pagine A Tutto Schermo */
     #sito-interno {
       width: 100%;
       display: flex;
@@ -55,58 +55,82 @@
 
     .sezione-pagina {
       width: 100%;
-      max-width: 500px;
-      padding: 30px 20px;
+      min-height: 100vh; /* Ogni sezione occupa l'intera altezza dello schermo */
+      padding: 50px 20px;
       text-align: center;
       display: flex;
       flex-direction: column;
-      justify-content: center; /* Centra verticalmente */
-      align-items: center;     /* Centra orizzontalmente */
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     }
 
-    .img-interno { width: 100%; height: auto; display: block; }
+    .img-interno { width: 100%; max-width: 100%; height: auto; display: block; }
     
-    /* Pagina 1: Sovrapposizione Testo al centro esatto dell'immagine */
-    .p-relative { position: relative; width: 100%; }
-    
+    /* Pagina 1: Overlay Testo */
+    .p-relative { position: relative; width: 100%; max-width: 600px; }
     .overlay-testo-p1 {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 85%;
+      width: 90%;
       text-align: center;
       color: #1a0305;
     }
 
-    .titolo-sposi { font-size: 28px; letter-spacing: 2px; font-weight: bold; }
-    .data-evento { font-size: 15px; margin-top: 6px; font-style: italic; }
+    .titolo-sposi { font-size: 32px; letter-spacing: 2px; font-weight: bold; }
+    .data-evento { font-size: 18px; margin-top: 8px; font-style: italic; }
 
     /* Pagina 2: Countdown e Mappa */
     .countdown-box {
-      display: flex; justify-content: center; gap: 10px; margin: 15px 0; width: 100%;
+      display: flex; justify-content: center; gap: 12px; margin: 20px 0; width: 100%; max-width: 450px;
     }
     .time-unit {
       background: rgba(255, 255, 255, 0.05);
-      padding: 8px 12px; border-radius: 8px; min-width: 60px;
+      padding: 12px; border-radius: 10px; flex: 1;
       border: 1px solid rgba(243, 229, 171, 0.3);
     }
-    .time-unit span { display: block; font-size: 20px; font-weight: bold; color: #f3e5ab; }
-    .time-unit label { font-size: 9px; text-transform: uppercase; font-family: sans-serif; opacity: 0.8; }
+    .time-unit span { display: block; font-size: 24px; font-weight: bold; color: #f3e5ab; }
+    .time-unit label { font-size: 10px; text-transform: uppercase; font-family: sans-serif; opacity: 0.8; }
 
     .mappa-container {
-      width: 100%; height: 200px; margin-top: 10px; border-radius: 12px; overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.2);
+      width: 100%; max-width: 500px; height: 260px; margin-top: 15px; border-radius: 15px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     }
     iframe { width: 100%; height: 100%; border: 0; }
 
-    /* Pagina 3: Dress Code e RSVP */
+    /* Pagina 3: Dettagli, Programma e RSVP */
+    .contenitore-dettagli { width: 100%; max-width: 500px; }
+    
+    .timeline {
+      margin: 20px 0;
+      text-align: left;
+      border-left: 2px solid #f3e5ab;
+      padding-left: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 320px;
+    }
+
+    .timeline-item { margin-bottom: 15px; position: relative; }
+    .timeline-item::before {
+      content: '•'; position: absolute; left: -26px; top: -2px; color: #f3e5ab; font-size: 20px;
+    }
+    .timeline-ora { font-weight: bold; color: #f3e5ab; font-family: sans-serif; font-size: 14px; }
+    .timeline-testo { font-size: 14px; opacity: 0.9; }
+
+    .nota-regalo {
+      font-size: 13px; font-style: italic; opacity: 0.85; line-height: 1.5; margin: 20px 0;
+      padding: 15px; background: rgba(255,255,255,0.03); border-radius: 10px;
+    }
+
     .btn-rsvp {
-      display: inline-block; margin-top: 20px; padding: 12px 28px;
+      display: inline-block; margin-top: 15px; padding: 16px 35px;
       background-color: #f3e5ab; color: #1a0305; text-decoration: none;
       font-weight: bold; font-family: sans-serif; border-radius: 30px;
       letter-spacing: 1px; transition: transform 0.2s ease;
+      box-shadow: 0 5px 15px rgba(243, 229, 171, 0.2);
     }
     .btn-rsvp:active { transform: scale(0.95); }
   </style>
@@ -122,10 +146,10 @@
       <div class="testo-tap">TAP TO OPEN</div>
     </div>
 
-    <!-- Contenuto Interno Centrato -->
+    <!-- Contenuto Interno diviso in 3 Pagine Distinte -->
     <div id="sito-interno">
       
-      <!-- PAGINA 1 -->
+      <!-- PAGINA 1: Copertina e Nomi -->
       <div class="sezione-pagina">
         <div class="p-relative">
           <img class="img-interno" src="invito-interno.png" alt="Invito">
@@ -136,9 +160,10 @@
         </div>
       </div>
 
-      <!-- PAGINA 2 -->
+      <!-- PAGINA 2: Location e Countdown -->
       <div class="sezione-pagina">
-        <h2 style="color: #f3e5ab; font-size: 22px;">Il Countdown</h2>
+        <h2 style="color: #f3e5ab; font-size: 26px; letter-spacing: 1px;">Il Nostro Countdown</h2>
+        
         <div class="countdown-box">
           <div class="time-unit"><span id="giorni">00</span><label>Giorni</label></div>
           <div class="time-unit"><span id="ore">00</span><label>Ore</label></div>
@@ -146,27 +171,50 @@
           <div class="time-unit"><span id="secondi">00</span><label>Sec</label></div>
         </div>
 
-        <h3 style="margin-top: 15px; font-size: 18px; color: #f3e5ab;">Villa Balbiano</h3>
-        <p style="font-size: 13px; opacity: 0.8; margin-top: 4px;">Piazza Sommariva 2, Ossuccio, Lago di Como</p>
+        <h3 style="margin-top: 20px; font-size: 22px; color: #f3e5ab;">Villa Balbiano</h3>
+        <p style="font-size: 15px; opacity: 0.85; margin-top: 5px;">Piazza Sommariva 2, Ossuccio, Lago di Como</p>
         
         <div class="mappa-container">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2777.491328902517!2d9.1724213!3d45.9614532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478423f044943f65%3A0xb351e2333792fa6!2sVilla%20Balbiano!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit" allowfullscreen="" loading="lazy"></iframe>
         </div>
       </div>
 
-      <!-- PAGINA 3 -->
+      <!-- PAGINA 3: Programma, Dress Code, Lista Nozze e RSVP -->
       <div class="sezione-pagina">
-        <h2 style="color: #f3e5ab; font-size: 22px;">Dress Code</h2>
-        <p style="margin-top: 8px; font-size: 15px; font-style: italic;">Elegante & Formale</p>
-        
-        <hr style="margin: 20px auto; width: 40%; border: 0; border-top: 1px solid rgba(255,255,255,0.2);">
+        <div class="contenitore-dettagli">
+          
+          <h2 style="color: #f3e5ab; font-size: 24px;">Programma della Giornata</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-ora">16:30</div>
+              <div class="timeline-testo">Cerimonia Simbolica in Giardino</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-ora">18:00</div>
+              <div class="timeline-testo">Aperitivo di Benvenuto & Gala Dinner</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-ora">22:30</div>
+              <div class="timeline-testo">Taglio della Torta & Party Night</div>
+            </div>
+          </div>
 
-        <h2 style="color: #f3e5ab; font-size: 22px;">Conferma la tua presenza</h2>
-        <p style="font-size: 13px; margin-top: 8px; opacity: 0.8;">È gradita gentile conferma entro il 15 Luglio 2027</p>
-        
-        <a href="https://wa.me/393331234567?text=Ciao!%20Confermo%20la%20mia%20presenza%20al%20matrimonio!" class="btn-rsvp" target="_blank">
-          CONFERMA SU WHATSAPP
-        </a>
+          <h3 style="color: #f3e5ab; font-size: 18px; margin-top: 25px;">Dress Code</h3>
+          <p style="margin-top: 5px; font-size: 15px; font-style: italic;">Black Tie / Elegante e Formale</p>
+          <p style="font-size: 12px; opacity: 0.7; margin-top: 3px;">(Toni scuri e raffinati per gli uomini, abito lungo per le donne)</p>
+
+          <div class="nota-regalo">
+            "Il regalo più grande sarà la vostra presenza. Per chi desiderasse contribuire al nostro viaggio da sogno..."
+          </div>
+
+          <h2 style="color: #f3e5ab; font-size: 22px; margin-top: 25px;">RSVP</h2>
+          <p style="font-size: 13px; margin-top: 5px; opacity: 0.85;">È gradita gentile conferma entro il 15 Luglio 2027</p>
+          
+          <a href="https://wa.me/393331234567?text=Ciao!%20Confermo%20la%20mia%20presenza%20al%20matrimonio!" class="btn-rsvp" target="_blank">
+            CONFERMA SU WHATSAPP
+          </a>
+
+        </div>
       </div>
 
     </div>
