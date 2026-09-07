@@ -15,7 +15,7 @@
 
     #invito-wrapper { position: relative; width: 100%; min-height: 100vh; }
 
-    /* Copertina CD Y2K con Sfondo Sfumato Glam Rosa e Viola */
+    /* Copertina CD Y2K */
     #copertina-cd {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       z-index: 100; display: flex; flex-direction: column;
@@ -57,7 +57,7 @@
 
     #copertina-cd.nascosto { opacity: 0; visibility: hidden; pointer-events: none; }
 
-    /* Pagine Interne con Sfondo Glam */
+    /* Pagine Interne */
     #sito-interno { 
       width: 100%; display: flex; flex-direction: column; align-items: center;
       background: radial-gradient(circle, #2a023b 0%, #0d0014 100%);
@@ -123,16 +123,20 @@
 </head>
 <body>
 
-  <!-- Audio Element -->
-<audio id="bg-music" loop preload="auto">
-  <source src="./musica.mp3" type="audio/mpeg">
-</audio>
+  <!-- Audio Element con fallback automatico -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="./musica.mp3" type="audio/mpeg">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+  <button id="audio-control" onclick="toggleAudio()">🔊 MUSIC ON</button>
+
+  <div id="invito-wrapper">
     <!-- Copertina CD Animato -->
     <div id="copertina-cd" onclick="playCD()">
       <div class="cd-container">
         <img id="disco-img" class="img-cd" src="cd-copertina.png" alt="CD Y2K Amaya">
       </div>
-      <div class="btn-play-cd">▶️ PLAY ALBUM</div>
+      <div class="btn-play-cd">▶ PLAY ALBUM</div>
     </div>
 
     <!-- Contenuto Interno -->
@@ -186,11 +190,11 @@
       
       disco.classList.add('cd-spin');
 
-      // Tenta la riproduzione immediata al tocco dell'utente
+      // Tenta l'avvio della musica al click dell'utente
       audio.play().then(() => {
         audioBtn.style.display = 'block';
       }).catch(err => {
-        console.log("Audio non riprodotto:", err);
+        console.log("Errore audio:", err);
       });
 
       setTimeout(function() {
