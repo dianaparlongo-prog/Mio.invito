@@ -13,16 +13,13 @@
     /* Copertina con le ante */
     #busta-copertina {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 100; display: flex; cursor: pointer;
+      z-index: 100; display: flex; cursor: pointer; overflow: hidden;
     }
 
     .anta {
-      width: 50%; height: 100%;
-      background-size: cover; background-position: center;
+      width: 50%; height: 100%; object-fit: cover;
       transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
     }
-    .anta-sinistra { background-image: url('anta-sinistra.png'); }
-    .anta-destra { background-image: url('anta-destra.png'); }
 
     .fiocco-centro {
       position: absolute; top: 50%; left: 50%;
@@ -45,7 +42,7 @@
     #busta-copertina.aperto .testo-tap { opacity: 0; pointer-events: none; }
     #busta-copertina.aperto { pointer-events: none; }
 
-    /* Parte interna con più pagine */
+    /* Parte interna dell'invito */
     #sito-interno {
       width: 100%;
       min-height: 100vh;
@@ -67,17 +64,17 @@
   <div id="invito-wrapper">
     <!-- Copertina Interattiva -->
     <div id="busta-copertina" onclick="apriInvito()">
-      <div class="anta anta-sinistra"></div>
+      <img class="anta anta-sinistra" src="anta-sinistra.png" alt="Anta Sinistra">
       <img class="fiocco-centro" src="fiocco.png" alt="Fiocco">
-      <div class="anta anta-destra"></div>
+      <img class="anta anta-destra" src="anta-destra.png" alt="Anta Destra">
       <div class="testo-tap">TAP TO OPEN</div>
     </div>
 
-    <!-- Pagine dell'Invito (In sequenza verticale) -->
+    <!-- Pagine dell'Invito -->
     <div id="sito-interno">
-      <img class="img-interno" src="invito-interno.png" alt="Pagina 1 - Invito">
-      <img class="img-interno" src="invito-pagina2.png" alt="Pagina 2 - Location e Dettagli">
-      <img class="img-interno" src="invito-pagina3.png" alt="Pagina 3 - Programma e Lista Nozze">
+      <img class="img-interno" src="invito-interno.png" alt="Pagina 1">
+      <img class="img-interno" src="invito-pagina2.png" alt="Pagina 2">
+      <img class="img-interno" src="invito-pagina3.png" alt="Pagina 3">
     </div>
   </div>
 
