@@ -27,15 +27,15 @@
     .fiocco-centro {
       position: absolute; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 240px; z-index: 102;
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      width: 240px; max-width: 70%; z-index: 105;
+      transition: opacity 0.6s ease;
     }
 
     .testo-tap {
       position: absolute; bottom: 35px; left: 50%;
       transform: translateX(-50%); font-size: 11px;
       letter-spacing: 3px; color: #ffffff; z-index: 101;
-      font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.6);
     }
 
     /* Effetto apertura */
@@ -45,16 +45,27 @@
     #busta-copertina.aperto .testo-tap { opacity: 0; pointer-events: none; }
     #busta-copertina.aperto { pointer-events: none; }
 
-    /* Invito Interno */
+    /* Parte interna con più pagine */
     #sito-interno {
-      min-height: 100vh; width: 100%;
-      background: url('invito-interno.png') center top / cover no-repeat;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .img-interno {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      display: block;
     }
   </style>
 </head>
 <body>
 
   <div id="invito-wrapper">
+    <!-- Copertina Interattiva -->
     <div id="busta-copertina" onclick="apriInvito()">
       <div class="anta anta-sinistra"></div>
       <img class="fiocco-centro" src="fiocco.png" alt="Fiocco">
@@ -62,7 +73,12 @@
       <div class="testo-tap">TAP TO OPEN</div>
     </div>
 
-    <div id="sito-interno"></div>
+    <!-- Pagine dell'Invito (In sequenza verticale) -->
+    <div id="sito-interno">
+      <img class="img-interno" src="invito-interno.png" alt="Pagina 1 - Invito">
+      <img class="img-interno" src="invito-pagina2.png" alt="Pagina 2 - Location e Dettagli">
+      <img class="img-interno" src="invito-pagina3.png" alt="Pagina 3 - Programma e Lista Nozze">
+    </div>
   </div>
 
   <script>
