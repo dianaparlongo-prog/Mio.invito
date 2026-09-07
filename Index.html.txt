@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invito di Nozze</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body, html { width: 100%; height: 100%; overflow-x: hidden; font-family: sans-serif; background-color: #1a0305; }
+
+    #invito-wrapper { position: relative; width: 100%; min-height: 100vh; }
+
+    /* Copertina con le ante */
+    #busta-copertina {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 100; display: flex; cursor: pointer;
+    }
+
+    .anta {
+      width: 50%; height: 100%;
+      background-size: cover; background-position: center;
+      transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    .anta-sinistra { background-image: url('anta-sinistra.png'); }
+    .anta-destra { background-image: url('anta-destra.png'); }
+
+    .fiocco-centro {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 240px; z-index: 102;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .testo-tap {
+      position: absolute; bottom: 35px; left: 50%;
+      transform: translateX(-50%); font-size: 11px;
+      letter-spacing: 3px; color: #ffffff; z-index: 101;
+      font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* Effetto apertura */
+    #busta-copertina.aperto .anta-sinistra { transform: translateX(-100%); }
+    #busta-copertina.aperto .anta-destra { transform: translateX(100%); }
+    #busta-copertina.aperto .fiocco-centro,
+    #busta-copertina.aperto .testo-tap { opacity: 0; pointer-events: none; }
+    #busta-copertina.aperto { pointer-events: none; }
+
+    /* Invito Interno */
+    #sito-interno {
+      min-height: 100vh; width: 100%;
+      background: url('invito-interno.png') center top / cover no-repeat;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="invito-wrapper">
+    <div id="busta-copertina" onclick="apriInvito()">
+      <div class="anta anta-sinistra"></div>
+      <img class="fiocco-centro" src="fiocco.png" alt="Fiocco">
+      <div class="anta anta-destra"></div>
+      <div class="testo-tap">TAP TO OPEN</div>
+    </div>
+
+    <div id="sito-interno"></div>
+  </div>
+
+  <script>
+    function apriInvito() {
+      document.getElementById('busta-copertina').classList.add('aperto');
+    }
+  </script>
+
+</body>
+</html>
