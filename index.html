@@ -10,28 +10,30 @@
     body { 
       width: 100%; height: 100%; overflow-x: hidden; 
       font-family: 'Courier New', Courier, monospace; 
-      background-color: #0d0118; color: #ff007f; 
+      background-color: #1a0126; color: #ff007f; 
     }
 
     #invito-wrapper { position: relative; width: 100%; min-height: 100vh; }
 
-    /* Copertina CD Y2K */
+    /* Copertina CD Y2K con Sfondo Sfumato Glam Rosa e Viola */
     #copertina-cd {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       z-index: 100; display: flex; flex-direction: column;
       justify-content: center; align-items: center; cursor: pointer;
-      background-color: #0d0118; transition: opacity 0.8s ease, visibility 0.8s;
+      background: radial-gradient(circle, #3d0352 0%, #1a0126 70%, #0d0014 100%);
+      transition: opacity 0.8s ease, visibility 0.8s;
+      padding: 20px;
     }
 
     .cd-container {
-      position: relative; width: 320px; height: 320px;
+      position: relative; width: 320px; max-width: 85vw; height: 320px; max-height: 85vw;
       display: flex; justify-content: center; align-items: center;
     }
 
     .img-cd {
       width: 100%; height: 100%; object-fit: contain;
       border-radius: 50%;
-      box-shadow: 0 0 25px rgba(255, 0, 127, 0.6);
+      box-shadow: 0 0 35px #ff007f, 0 0 15px #00ffff;
       transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -43,19 +45,23 @@
     }
 
     .btn-play-cd {
-      margin-top: 30px; padding: 12px 25px;
-      background: #ff007f; color: #ffffff; font-weight: bold;
+      margin-top: 35px; padding: 14px 28px;
+      background: linear-gradient(45deg, #ff007f, #ff66cc); color: #ffffff; font-weight: bold;
       font-family: sans-serif; font-size: 13px; letter-spacing: 3px;
       border: 2px solid #00ffff; border-radius: 30px;
-      box-shadow: 0 0 15px #ff007f; animation: blink 1s infinite;
+      box-shadow: 0 0 20px #ff007f, 0 0 10px #00ffff; animation: blink 1s infinite;
+      text-transform: uppercase;
     }
 
-    @keyframes blink { 50% { opacity: 0.4; } }
+    @keyframes blink { 50% { opacity: 0.5; transform: scale(0.98); } }
 
     #copertina-cd.nascosto { opacity: 0; visibility: hidden; pointer-events: none; }
 
-    /* Pagine Interne */
-    #sito-interno { width: 100%; display: flex; flex-direction: column; align-items: center; }
+    /* Pagine Interne con Sfondo Glam */
+    #sito-interno { 
+      width: 100%; display: flex; flex-direction: column; align-items: center;
+      background: radial-gradient(circle, #2a023b 0%, #0d0014 100%);
+    }
 
     .sezione-pagina {
       width: 100%; min-height: 100vh; padding: 40px 20px; text-align: center;
@@ -65,44 +71,44 @@
 
     .img-collage {
       width: 100%; max-width: 450px; height: auto; display: block;
-      border: 2px solid #00ffff; box-shadow: 0 0 20px #ff007f; border-radius: 10px;
+      border: 2px solid #00ffff; box-shadow: 0 0 25px #ff007f; border-radius: 12px;
     }
 
     .btn-next-track {
-      display: inline-block; margin-top: 25px; padding: 12px 25px;
+      display: inline-block; margin-top: 25px; padding: 14px 28px;
       background: #000000; color: #00ffff; font-weight: bold;
-      font-family: sans-serif; font-size: 12px; letter-spacing: 2px;
-      border: 2px solid #ff007f; border-radius: 8px; text-decoration: none;
-      box-shadow: 0 0 10px #00ffff; transition: transform 0.2s;
+      font-family: sans-serif; font-size: 13px; letter-spacing: 2px;
+      border: 2px solid #ff007f; border-radius: 30px; text-decoration: none;
+      box-shadow: 0 0 15px #00ffff; transition: transform 0.2s;
     }
     .btn-next-track:active { transform: scale(0.95); }
 
     /* Pagina 2: Dettagli & Countdown */
     .info-box {
-      background: rgba(0,0,0,0.8); border: 2px solid #ff007f; border-radius: 10px;
-      padding: 15px; width: 100%; max-width: 450px; margin-bottom: 15px;
-      box-shadow: 0 0 10px #ff007f;
+      background: rgba(20, 0, 30, 0.85); border: 2px solid #ff007f; border-radius: 12px;
+      padding: 18px; width: 100%; max-width: 450px; margin-bottom: 15px;
+      box-shadow: 0 0 15px #ff007f;
     }
 
     .countdown-box { display: flex; justify-content: center; gap: 8px; margin: 15px 0; width: 100%; max-width: 420px; }
     .time-unit {
-      background: #000; padding: 10px; border-radius: 5px; flex: 1;
-      border: 2px solid #00ffff; box-shadow: 0 0 8px #00ffff;
+      background: #000; padding: 12px 8px; border-radius: 8px; flex: 1;
+      border: 2px solid #00ffff; box-shadow: 0 0 10px #00ffff;
     }
     .time-unit span { display: block; font-size: 22px; font-weight: bold; color: #ff007f; font-family: sans-serif; }
-    .time-unit label { font-size: 8px; text-transform: uppercase; color: #fff; opacity: 0.9; }
+    .time-unit label { font-size: 9px; text-transform: uppercase; color: #fff; opacity: 0.9; }
 
     .mappa-container {
-      width: 100%; max-width: 450px; height: 200px; margin-top: 10px; border-radius: 8px; overflow: hidden;
-      border: 2px solid #00ffff; box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+      width: 100%; max-width: 450px; height: 210px; margin-top: 10px; border-radius: 10px; overflow: hidden;
+      border: 2px solid #00ffff; box-shadow: 0 0 15px rgba(255, 0, 127, 0.6);
     }
     iframe { width: 100%; height: 100%; border: 0; filter: invert(90%) hue-rotate(180deg); }
 
     .btn-rsvp {
-      display: inline-block; margin-top: 20px; padding: 15px 30px;
-      background: #ff007f; color: #ffffff; text-decoration: none;
+      display: inline-block; margin-top: 20px; padding: 16px 32px;
+      background: linear-gradient(45deg, #ff007f, #ff00cc); color: #ffffff; text-decoration: none;
       font-weight: bold; font-family: sans-serif; border-radius: 50px; letter-spacing: 2px;
-      border: 2px solid #00ffff; box-shadow: 0 0 15px #ff007f; transition: transform 0.2s;
+      border: 2px solid #00ffff; box-shadow: 0 0 20px #ff007f; transition: transform 0.2s;
     }
     .btn-rsvp:active { transform: scale(0.95); }
   </style>
@@ -144,8 +150,8 @@
           <div class="time-unit"><span id="secondi">00</span><label>Secs</label></div>
         </div>
 
-        <h3 style="margin-top: 10px; font-size: 16px; color: #ff007f;">LOCATION & MAP</h3>
-        <p style="font-size: 12px; color: #fff;">2651 Kipling St, Houston, TX 77098</p>
+        <h3 style="margin-top: 10px; font-size: 16px; color: #ff007f; text-shadow: 0 0 8px #ff007f;">LOCATION & MAP</h3>
+        <p style="font-size: 12px; color: #fff; margin-bottom: 5px;">2651 Kipling St, Houston, TX 77098</p>
         
         <div class="mappa-container">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3464.2!2d-95.421!3d29.738!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjl8NDQnMTYuOCJOIDk1wrAyNScxNS42Ilc!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit" allowfullscreen="" loading="lazy"></iframe>
@@ -171,7 +177,6 @@
       }, 1000);
     }
 
-    // Data aggiornata: 6 Febbraio 2027 (dall'immagine del CD)
     const dataFesta = new Date(2027, 1, 6, 19, 30, 0).getTime();
 
     const timer = setInterval(function() {
@@ -181,7 +186,7 @@
       if (differenza > 0) {
         document.getElementById("giorni").innerText = Math.floor(differenza / (1000 * 60 * 60 * 24));
         document.getElementById("ore").innerText = Math.floor((differenza % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        document.getElementById("minuti").innerText = Math.floor((differenza % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById("minuti").innerText = Math.floor((differenza % (1000 * 60 % (1000 * 60 * 60))) / (1000 * 60));
         document.getElementById("secondi").innerText = Math.floor((differenza % (1000 * 60)) / 1000);
       } else {
         clearInterval(timer);
